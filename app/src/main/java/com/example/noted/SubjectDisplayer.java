@@ -35,7 +35,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
         subjectsList=DataClass.getData(year,stream,sem);
         if(subjectsList.size()<=0)
         {
-            Toast.makeText(this,"NOTHING TO DISPLAY",Toast.LENGTH_LONG).show();
+            Toast.makeText(this,"NOTHING TO DISPLAY",Toast.LENGTH_SHORT).show();
             finish();
         }
         else {

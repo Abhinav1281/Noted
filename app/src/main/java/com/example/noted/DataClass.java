@@ -1,9 +1,11 @@
 package com.example.noted;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 public class DataClass {
     static ArrayList<String> Subjects=new ArrayList<>();
+    static ArrayList<String> Streams=new ArrayList<>();
     static ArrayList<String> getData(String year,String Stream,int sem)
     {
         if(year.equals("SECOND"))
@@ -21,5 +23,12 @@ public class DataClass {
             }
         }
         return Subjects;
+    }
+    static ArrayList<String> getStreams()
+    {
+        Streams.add("CSE");
+        Streams.add("CSCE");
+        Streams.add("CSSE");
+        return Streams;
     }
 }

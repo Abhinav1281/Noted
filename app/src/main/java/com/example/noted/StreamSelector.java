@@ -5,45 +5,41 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 
-public class StreamSelector extends AppCompatActivity implements View.OnClickListener {
+import java.util.ArrayList;
+
+public class StreamSelector extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     String year,stream;
     int sem;
-    Button cs,csc,css;
+    ListView streamList;
+    ArrayList<String> streams;
+    ArrayAdapter arrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stream_selector);
         sem=getIntent().getIntExtra("SEMESTER",1);
         year=getIntent().getStringExtra("YEAR");
-        cs=findViewById(R.id.CSE);
-        csc=findViewById(R.id.CSCE);
-        css=findViewById(R.id.CSSE);
-        cs.setOnClickListener(StreamSelector.this);
-        csc.setOnClickListener(StreamSelector.this);
-        css.setOnClickListener(StreamSelector.this);
+        streamList=findViewById(R.id.StreamList);
+        streams=DataClass.getStreams();
+        arrayAdapter=new ArrayAdapter(StreamSelector.this,android.R.layout.simple_list_item_1,streams);
+        streamList.setAdapter(arrayAdapter);
+        streamList.setOnItemClickListener(StreamSelector.this);
     }
 
+
+
     @Override
-    public void onClick(View v) {
-        switch (v.getId())
-        {
-            case R.id.CSE:
-                stream="CSE";
-                break;
-            case R.id.CSCE:
-                stream="CSCE";
-                break;
-            case R.id.CSSE:
-                stream="CSSE";
-                break;
-        }
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(StreamSelector.this, SubjectDisplayer.class);
         intent.putExtra("YEAR", year);
         intent.putExtra("SEMESTER",sem);
-        intent.putExtra("STREAM",stream);
+        intent.putExtra("STREAM",streams.get(position));
         startActivity(intent);
     }
 }
