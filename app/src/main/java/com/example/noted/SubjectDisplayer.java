@@ -1,15 +1,21 @@
 package com.example.noted;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Toast;
+
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 
@@ -31,6 +37,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
         subjects=findViewById(R.id.Subjects);
         subjects.setOnItemClickListener(SubjectDisplayer.this);
 
+        setTitle(year+" YEAR::"+sem+" SEMESTER::"+stream);
        // Toast.makeText(this,sem+" ::"+stream+"::"+year,Toast.LENGTH_LONG).show();
         subjectsList=DataClass.getData(year,stream,sem);
         if(subjectsList.size()<=0)
@@ -64,9 +71,12 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
         {
             Intent intent=new Intent(SubjectDisplayer.this,PdfViewer.class);
             intent.putExtra("PDFURL",pdfUrl);
+            intent.putExtra("SubjectName",subjectsList.get(position));
             startActivity(intent);
             pdfUrl="";
         }
 
     }
+
+
 }

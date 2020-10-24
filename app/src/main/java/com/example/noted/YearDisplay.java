@@ -1,12 +1,18 @@
 package com.example.noted;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.parse.ParseUser;
 
 public class YearDisplay extends AppCompatActivity implements View.OnClickListener {
 
@@ -28,6 +34,7 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
         semChange=findViewById(R.id.semChange);
         semChange.setOnClickListener(YearDisplay.this);
         semText=findViewById(R.id.semText);
+        setTitle("WELCOME "+ParseUser.getCurrentUser().getUsername());
 
     }
 
@@ -67,5 +74,21 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
             intent.putExtra("SEMESTER",sem);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.main_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.LogoutUser) {
+            ParseUser.logOutInBackground();
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

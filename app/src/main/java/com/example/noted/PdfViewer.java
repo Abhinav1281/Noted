@@ -1,9 +1,15 @@
 package com.example.noted;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.webkit.WebView;
+
+import com.parse.ParseUser;
 
 public class PdfViewer extends AppCompatActivity {
     WebView webview;
@@ -15,6 +21,7 @@ public class PdfViewer extends AppCompatActivity {
         webview.getSettings().setJavaScriptEnabled(true);
         String pdf = getIntent().getStringExtra("PDFURL");
         webview.loadUrl(pdf);
+        setTitle(getIntent().getStringExtra("SubjectName"));
     }
 
     @Override
@@ -22,4 +29,6 @@ public class PdfViewer extends AppCompatActivity {
         webview.loadUrl("about:blank");
         super.onBackPressed();
     }
+
+
 }
