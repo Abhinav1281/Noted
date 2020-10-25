@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".StreamSelector">
+    tools:context=".StreamSelector"
+    android:background="#34eb98">
 
 
     <ListView
@@ -15,5 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="30dp"/>
+        android:layout_margin="30dp"
+        android:divider="#34eb98"
+        android:dividerHeight="10dp"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

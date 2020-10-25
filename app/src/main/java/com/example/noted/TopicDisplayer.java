@@ -1,10 +1,13 @@
 package com.example.noted;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,7 +28,16 @@ public class TopicDisplayer extends AppCompatActivity implements AdapterView.OnI
         subject=getIntent().getStringExtra("SUBJECT");
         TopicList=findViewById(R.id.TopicsList);
         Topics=DataClass.getTopics(subject);
-        TopicsAdapter=new ArrayAdapter(TopicDisplayer.this,android.R.layout.simple_list_item_1,Topics);
+        TopicsAdapter=new ArrayAdapter(TopicDisplayer.this,android.R.layout.simple_list_item_1,Topics){
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                View row=super.getView(position,convertView,parent);
+                row.setBackground((getDrawable(R.drawable.listbg)));
+                row.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                return row;
+            }
+        };
         TopicList.setAdapter(TopicsAdapter);
         TopicList.setOnItemClickListener(TopicDisplayer.this);
         if(Topics.size()<=0)

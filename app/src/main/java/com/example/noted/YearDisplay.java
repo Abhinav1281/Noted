@@ -53,12 +53,17 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
                 semText.setText("1st");
             }
         }
+        else if(v.getId()==R.id.fstYear)
+        {
+            String year = "FIRST";
+            Intent intent = new Intent(YearDisplay.this, SubjectDisplayer.class);
+            intent.putExtra("YEAR", year);
+            startActivity(intent);
+        }
         else {
             String year = "";
             switch (v.getId()) {
-                case R.id.fstYear:
-                    year = "FIRST";
-                    break;
+
                 case R.id.sYear:
                     year = "SECOND";
                     break;

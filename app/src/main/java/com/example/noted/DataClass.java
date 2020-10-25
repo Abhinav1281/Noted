@@ -21,6 +21,13 @@ public class DataClass {
                     Subjects.add("PS");
                     Subjects.add("ECO");
                 }
+                if(Stream.equals("CSE")||Stream.equals("CSSE")||Stream.equals("IT")) {
+                    Subjects.add("DSA");
+                    Subjects.add("OOPS");
+                    Subjects.add("DEC");
+                    Subjects.add("PS");
+                    Subjects.add("ECO");
+                }
             }
         }
         return Subjects;
@@ -30,6 +37,7 @@ public class DataClass {
         Streams.add("CSE");
         Streams.add("CSCE");
         Streams.add("CSSE");
+        Streams.add("IT");
         return Streams;
     }
 
@@ -47,17 +55,33 @@ public class DataClass {
                 Topics.add("PSS Complete");
                 break;
             case "PS":
-                Topics.add("2.1");
-                Topics.add("2.2");
+                Topics.add("2.1-2.2");
                 Topics.add("2.4");
+                Topics.add("2.5");
                 Topics.add("3.1-3.2");
                 Topics.add("3.3");
                 Topics.add("3.4");
                 Topics.add("3.5");
                 Topics.add("3.6");
                 break;
-
+            case "ECO":
+                Topics.add("ECONOMICS Complete");
         }
         return Topics;
+    }
+
+    static ArrayList<String> getDataFirst()
+    {
+        Subjects.add("Physics");
+        Subjects.add("Chemistry");
+        Subjects.add("Maths-I");
+        Subjects.add("Maths-II");
+        Subjects.add("Computer");
+        Subjects.add("P.Com");
+        Subjects.add("Biology");
+        Subjects.add("AEC");
+        Subjects.add("Mechanical");
+        Subjects.add("Electrical");
+        return Subjects;
     }
 }

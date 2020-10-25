@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SubjectDisplayer">
+    tools:context=".SubjectDisplayer"
+    android:background="#34eb98">
 
     <ListView
         android:layout_width="match_parent"
@@ -14,5 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/Subjects"
-        android:layout_margin="30dp"/>
+        android:layout_margin="30dp"
+        android:dividerHeight="10dp"
+        android:divider="#34eb98"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

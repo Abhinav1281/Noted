@@ -1,6 +1,7 @@
 package com.example.noted;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -30,24 +32,55 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_displayer);
-
-        sem=getIntent().getIntExtra("SEMESTER",1);
         year=getIntent().getStringExtra("YEAR");
-        stream=getIntent().getStringExtra("STREAM");
-        subjects=findViewById(R.id.Subjects);
-        subjects.setOnItemClickListener(SubjectDisplayer.this);
-
-        setTitle(year+" YEAR::"+sem+" SEMESTER::"+stream);
-
-        subjectsList=DataClass.getData(year,stream,sem);
-        if(subjectsList.size()<=0)
+        if(year.equals("FIRST"))
         {
-            Toast.makeText(this,"NOTHING TO DISPLAY",Toast.LENGTH_SHORT).show();
-            finish();
+            subjectsList=DataClass.getDataFirst();
+            subjects = findViewById(R.id.Subjects);
+            subjects.setOnItemClickListener(SubjectDisplayer.this);
+            if (subjectsList.size() <= 0) {
+                Toast.makeText(this, "NOTHING TO DISPLAY", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, subjectsList) {
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        View row = super.getView(position, convertView, parent);
+                        row.setBackground((getDrawable(R.drawable.listbg)));
+                        row.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        return row;
+                    }
+                };
+                subjects.setAdapter(arrayAdapter);
+            }
         }
         else {
-            arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, subjectsList);
-            subjects.setAdapter(arrayAdapter);
+            sem = getIntent().getIntExtra("SEMESTER", 1);
+
+            stream = getIntent().getStringExtra("STREAM");
+            subjects = findViewById(R.id.Subjects);
+            subjects.setOnItemClickListener(SubjectDisplayer.this);
+
+            setTitle(year + " YEAR::" + sem + " SEMESTER::" + stream);
+
+            subjectsList = DataClass.getData(year, stream, sem);
+            if (subjectsList.size() <= 0) {
+                Toast.makeText(this, "NOTHING TO DISPLAY", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, subjectsList) {
+                    @NonNull
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                        View row = super.getView(position, convertView, parent);
+                        row.setBackground((getDrawable(R.drawable.listbg)));
+                        row.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                        return row;
+                    }
+                };
+                subjects.setAdapter(arrayAdapter);
+            }
         }
     }
 

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".Login"
+    android:background="#34eb98">
     <EditText
         android:id="@+id/editLoginUser"
         android:layout_width="wrap_content"
@@ -40,6 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editLoginPass" />
+        app:layout_constraintTop_toBottomOf="@+id/editLoginPass"
+        android:background="@drawable/buttonbg"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
