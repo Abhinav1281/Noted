@@ -38,7 +38,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
         subjects.setOnItemClickListener(SubjectDisplayer.this);
 
         setTitle(year+" YEAR::"+sem+" SEMESTER::"+stream);
-       // Toast.makeText(this,sem+" ::"+stream+"::"+year,Toast.LENGTH_LONG).show();
+
         subjectsList=DataClass.getData(year,stream,sem);
         if(subjectsList.size()<=0)
         {
@@ -62,21 +62,12 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String pdfUrl=PdfAdapter.ShowPdf(subjectsList.get(position));
-        if(pdfUrl.equals("BLANK"))
-        {
-            Toast.makeText(SubjectDisplayer.this,"NOTHING TO DISPLAY",Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            Intent intent=new Intent(SubjectDisplayer.this,PdfViewer.class);
-            intent.putExtra("PDFURL",pdfUrl);
-            intent.putExtra("SubjectName",subjectsList.get(position));
+
+            Intent intent=new Intent(SubjectDisplayer.this,TopicDisplayer.class);
+            intent.putExtra("SUBJECT",subjectsList.get(position));
             startActivity(intent);
-            pdfUrl="";
         }
 
     }
 
 
-}
