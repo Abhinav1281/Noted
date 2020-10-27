@@ -17,7 +17,7 @@ import com.parse.ParseUser;
 public class YearDisplay extends AppCompatActivity implements View.OnClickListener {
 
     int sem=1;
-    Button f,s,t,fo,semChange;
+    Button f,s,t,fo,semChange,godMode;
     TextView semText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,14 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
         semChange.setOnClickListener(YearDisplay.this);
         semText=findViewById(R.id.semText);
         setTitle("WELCOME "+ParseUser.getCurrentUser().getUsername());
+        godMode=findViewById(R.id.godMode);
+        godMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(YearDisplay.this,AdderPage.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

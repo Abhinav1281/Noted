@@ -81,4 +81,15 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/foYear" />
+
+    <Button
+        android:id="@+id/godMode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="108dp"
+        android:text="Adder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/semChange"
+        android:background="@drawable/buttonbg"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -66,6 +66,7 @@ public class DataClass {
                 break;
             case "ECO":
                 Topics.add("ECONOMICS Complete");
+                break;
         }
         return Topics;
     }
