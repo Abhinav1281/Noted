@@ -54,7 +54,7 @@ public class StreamSelector extends AppCompatActivity implements AdapterView.OnI
                     for (ParseObject data : objects) {
                         stream.add(data.get("Stream").toString());
                     }
-                    Toast.makeText(StreamSelector.this, "STREAMS RETRIEVED", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(StreamSelector.this, "STREAMS RETRIEVED", Toast.LENGTH_SHORT).show();
                     AfterCreation();
 
                 } else

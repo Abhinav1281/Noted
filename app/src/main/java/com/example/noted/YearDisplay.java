@@ -66,6 +66,7 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
             String year = "FIRST";
             Intent intent = new Intent(YearDisplay.this, SubjectDisplayer.class);
             intent.putExtra("YEAR", year);
+            intent.putExtra("SEMESTER","FIRST");
             startActivity(intent);
         }
         else {

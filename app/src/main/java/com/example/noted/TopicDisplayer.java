@@ -47,7 +47,7 @@ public class TopicDisplayer extends AppCompatActivity implements AdapterView.OnI
                     for (ParseObject data : objects) {
                         Topics.add(data.get("Topic").toString());
                     }
-                    Toast.makeText(TopicDisplayer.this, "Topics RETRIEVED", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(TopicDisplayer.this, "Topics RETRIEVED", Toast.LENGTH_SHORT).show();
                     AfterCreation();
 
                 } else
@@ -92,7 +92,7 @@ public class TopicDisplayer extends AppCompatActivity implements AdapterView.OnI
         }
         else
         {
-            Toast.makeText(TopicDisplayer.this,"NO. OF TOPICS"+Topics.size(),Toast.LENGTH_SHORT).show();
+            //Toast.makeText(TopicDisplayer.this,"NO. OF TOPICS"+Topics.size(),Toast.LENGTH_SHORT).show();
             TopicsAdapter=new ArrayAdapter(TopicDisplayer.this,android.R.layout.simple_list_item_1,Topics){
                 @NonNull
                 @Override

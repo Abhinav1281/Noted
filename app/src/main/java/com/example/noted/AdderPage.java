@@ -32,12 +32,21 @@ public class AdderPage extends AppCompatActivity {
             public void onClick(View v) {
                 ParseObject urlAdder = new ParseObject("URL");
 // Store an object
-                urlAdder.put("Year", year.getText().toString());
-                urlAdder.put("Sem", sem.getText().toString());
-                urlAdder.put("Subject", subject.getText().toString());
-                urlAdder.put("Topic",topic.getText().toString());
+                urlAdder.put("Year", year.getText().toString().toUpperCase());
+
+                urlAdder.put("Subject", subject.getText().toString().toUpperCase());
+                urlAdder.put("Topic",topic.getText().toString().toUpperCase());
                 urlAdder.put("URL",url.getText().toString());
-                urlAdder.put("Stream",stream.getText().toString());
+
+                if(year.getText().toString().toUpperCase().equals("FIRST")) {
+                    urlAdder.put("Stream", "ALL");
+                    urlAdder.put("Sem","FIRST");
+                }
+                else
+                {
+                    urlAdder.put("Sem", sem.getText().toString().toUpperCase());
+                    urlAdder.put("Stream",stream.getText().toString().toUpperCase());
+                }
 // Saving object
                 urlAdder.saveInBackground(new SaveCallback() {
                     @Override

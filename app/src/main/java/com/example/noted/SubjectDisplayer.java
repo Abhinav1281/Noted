@@ -48,7 +48,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
         subjects.setOnItemClickListener(SubjectDisplayer.this);
 
 
-            Toast.makeText(SubjectDisplayer.this, "GETTING DATA", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(SubjectDisplayer.this, "GETTING DATA", Toast.LENGTH_SHORT).show();
             ParseQuery<ParseObject> subjectsQuery = ParseQuery.getQuery("URL");
             subjectsQuery.whereEqualTo("Year", year);
             subjectsQuery.whereEqualTo("Sem",sem);
@@ -59,7 +59,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
                         for (ParseObject data : objects) {
                             adderSubject(data.get("Subject").toString());
                         }
-                        Toast.makeText(SubjectDisplayer.this, "SUBJECTS RETRIEVED", Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(SubjectDisplayer.this, "SUBJECTS RETRIEVED", Toast.LENGTH_SHORT).show();
                         AfterCreation();
 
                     } else
@@ -68,35 +68,6 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
             });
 
 
-
-
-
-
-
-
-//            stream = getIntent().getStringExtra("STREAM");
-//            subjects = findViewById(R.id.Subjects);
-//            subjects.setOnItemClickListener(SubjectDisplayer.this);
-//
-//            setTitle(year + " YEAR::" + sem + " SEMESTER::" + stream);
-//
-//            subjectsList = DataClass.getData(year, stream, sem);
-//            if (subjectsList.size() <= 0) {
-//                Toast.makeText(this, "NOTHING TO DISPLAY", Toast.LENGTH_SHORT).show();
-//                finish();
-//            } else {
-//                arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, subjectsList) {
-//                    @NonNull
-//                    @Override
-//                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-//                        View row = super.getView(position, convertView, parent);
-//                        row.setBackground((getDrawable(R.drawable.listbg)));
-//                        row.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-//                        return row;
-//                    }
-//                };
-//                subjects.setAdapter(arrayAdapter);
-//            }
         }
 
 
