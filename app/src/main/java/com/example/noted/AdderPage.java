@@ -14,7 +14,7 @@ import com.parse.ParseObject;
 import com.parse.SaveCallback;
 
 public class AdderPage extends AppCompatActivity {
-    EditText year,sem,subject,topic,url;
+    EditText year,sem,subject,topic,url,stream;
     Button upload;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +25,7 @@ public class AdderPage extends AppCompatActivity {
         subject=findViewById(R.id.editSubject);
         topic=findViewById(R.id.editTopic);
         url=findViewById(R.id.editURL);
+        stream=findViewById(R.id.editStream);
         upload=findViewById(R.id.upload);
         upload.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +37,7 @@ public class AdderPage extends AppCompatActivity {
                 urlAdder.put("Subject", subject.getText().toString());
                 urlAdder.put("Topic",topic.getText().toString());
                 urlAdder.put("URL",url.getText().toString());
+                urlAdder.put("Stream",stream.getText().toString());
 // Saving object
                 urlAdder.saveInBackground(new SaveCallback() {
                     @Override

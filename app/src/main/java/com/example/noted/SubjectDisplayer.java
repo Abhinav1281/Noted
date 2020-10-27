@@ -31,8 +31,8 @@ import java.util.List;
 
 public class SubjectDisplayer extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    String year,stream;
-    int sem;
+    String year,stream,sem;
+
     ListView subjects;
     ArrayAdapter arrayAdapter;
     ArrayList<String> subjectsList=new ArrayList<>();
@@ -43,13 +43,15 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subject_displayer);
         year=getIntent().getStringExtra("YEAR");
-
+        sem = getIntent().getStringExtra("SEMESTER");
         subjects = findViewById(R.id.Subjects);
         subjects.setOnItemClickListener(SubjectDisplayer.this);
-        if(year.equals("FIRST")) {
+
+
             Toast.makeText(SubjectDisplayer.this, "GETTING DATA", Toast.LENGTH_SHORT).show();
             ParseQuery<ParseObject> subjectsQuery = ParseQuery.getQuery("URL");
-            subjectsQuery.whereEqualTo("Year", "FIRST");
+            subjectsQuery.whereEqualTo("Year", year);
+            subjectsQuery.whereEqualTo("Sem",sem);
             subjectsQuery.findInBackground(new FindCallback<ParseObject>() {
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {
@@ -67,36 +69,36 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
 
 
 
+
+
+
+
+
+//            stream = getIntent().getStringExtra("STREAM");
+//            subjects = findViewById(R.id.Subjects);
+//            subjects.setOnItemClickListener(SubjectDisplayer.this);
+//
+//            setTitle(year + " YEAR::" + sem + " SEMESTER::" + stream);
+//
+//            subjectsList = DataClass.getData(year, stream, sem);
+//            if (subjectsList.size() <= 0) {
+//                Toast.makeText(this, "NOTHING TO DISPLAY", Toast.LENGTH_SHORT).show();
+//                finish();
+//            } else {
+//                arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, subjectsList) {
+//                    @NonNull
+//                    @Override
+//                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+//                        View row = super.getView(position, convertView, parent);
+//                        row.setBackground((getDrawable(R.drawable.listbg)));
+//                        row.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+//                        return row;
+//                    }
+//                };
+//                subjects.setAdapter(arrayAdapter);
+//            }
         }
 
-        else {
-            sem = getIntent().getIntExtra("SEMESTER", 1);
-
-            stream = getIntent().getStringExtra("STREAM");
-            subjects = findViewById(R.id.Subjects);
-            subjects.setOnItemClickListener(SubjectDisplayer.this);
-
-            setTitle(year + " YEAR::" + sem + " SEMESTER::" + stream);
-
-            subjectsList = DataClass.getData(year, stream, sem);
-            if (subjectsList.size() <= 0) {
-                Toast.makeText(this, "NOTHING TO DISPLAY", Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, subjectsList) {
-                    @NonNull
-                    @Override
-                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                        View row = super.getView(position, convertView, parent);
-                        row.setBackground((getDrawable(R.drawable.listbg)));
-                        row.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                        return row;
-                    }
-                };
-                subjects.setAdapter(arrayAdapter);
-            }
-        }
-    }
 
     @Override
     public void onBackPressed() {

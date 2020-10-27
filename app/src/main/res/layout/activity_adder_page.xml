@@ -10,10 +10,10 @@
         android:id="@+id/editYear"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="44dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Enter Year"
+        android:inputType="textPersonName"
         android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -38,25 +38,27 @@
         android:id="@+id/editSubject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
-        android:textAllCaps="true"
-        android:inputType="textPersonName"
         android:hint="Edit Subject"
+        android:inputType="textPersonName"
+        android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editSem" />
+        app:layout_constraintTop_toBottomOf="@+id/editStream" />
 
     <EditText
         android:id="@+id/editTopic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Edit Topic"
+        android:inputType="textPersonName"
         android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editSubject" />
 
@@ -64,11 +66,12 @@
         android:id="@+id/editURL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="56dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Edit Url"
+        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTopic" />
 
@@ -83,6 +86,17 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editURL" />
+
+    <EditText
+        android:id="@+id/editStream"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:hint="ENTER STREAM"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/editSem"
+        tools:layout_editor_absoluteX="100dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

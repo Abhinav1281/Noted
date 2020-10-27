@@ -16,7 +16,7 @@ import com.parse.ParseUser;
 
 public class YearDisplay extends AppCompatActivity implements View.OnClickListener {
 
-    int sem=1;
+    String sem="FIRST";
     Button f,s,t,fo,semChange,godMode;
     TextView semText;
     @Override
@@ -50,15 +50,15 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         if(v.getId()==R.id.semChange)
         {
-            if(sem==1)
+            if(sem.equals("FIRST"))
             {
-                sem=2;
-                semText.setText("2nd");
+                sem="SECOND";
+                semText.setText(sem);
             }
             else
             {
-                sem=1;
-                semText.setText("1st");
+                sem="FIRST";
+                semText.setText(sem);
             }
         }
         else if(v.getId()==R.id.fstYear)
