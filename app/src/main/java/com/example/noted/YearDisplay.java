@@ -23,6 +23,19 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_display);
+        godMode=findViewById(R.id.godMode);
+        if(ParseUser.getCurrentUser().getUsername().equals("AbhinavTest") ||
+                ParseUser.getCurrentUser().getUsername().equals("Abhinav Sinha"))
+        {
+            godMode.setVisibility(View.VISIBLE);
+            godMode.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(YearDisplay.this,AdderPage.class);
+                    startActivity(intent);
+                }
+            });
+        }
         f=findViewById(R.id.fstYear);
         s=findViewById(R.id.sYear);
         t=findViewById(R.id.tYear);
@@ -35,14 +48,8 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
         semChange.setOnClickListener(YearDisplay.this);
         semText=findViewById(R.id.semText);
         setTitle("WELCOME "+ParseUser.getCurrentUser().getUsername());
-        godMode=findViewById(R.id.godMode);
-        godMode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(YearDisplay.this,AdderPage.class);
-                startActivity(intent);
-            }
-        });
+
+
 
     }
 
