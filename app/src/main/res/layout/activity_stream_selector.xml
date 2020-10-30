@@ -7,7 +7,7 @@
     tools:context=".StreamSelector"
     android:background="#34eb98">
 
-
+   
     <ListView
         android:id="@+id/StreamList"
         android:layout_width="match_parent"

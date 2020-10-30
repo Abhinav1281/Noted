@@ -30,6 +30,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'com.github.parse-community:Parse-SDK-Android:1.25.0'
+    compile 'com.github.mjn1369:prettydialog:1.0.4'
 
 }
 

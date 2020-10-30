@@ -27,6 +27,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import libs.mjn.prettydialog.PrettyDialog;
+import libs.mjn.prettydialog.PrettyDialogCallback;
+
+
 public class StreamSelector extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     String year,sem;
@@ -43,6 +47,13 @@ public class StreamSelector extends AppCompatActivity implements AdapterView.OnI
         year=getIntent().getStringExtra("YEAR");
         streamList=findViewById(R.id.StreamList);
         streamList.setOnItemClickListener(StreamSelector.this);
+        final PrettyDialog loading=new PrettyDialog(this)
+                .setTitle("LOADING")
+                .setMessage("Just a moment...");
+        loading.setIcon(R.drawable.loading);
+        loading.setIconTint(R.color.pdlg_color_red);
+        loading.show();
+
        //Toast.makeText(StreamSelector.this, "GETTING DATA of "+year+" "+sem, Toast.LENGTH_SHORT).show();
         ParseQuery<ParseObject> streamsQuery = ParseQuery.getQuery("URL");
         streamsQuery.whereEqualTo("Year", year);
@@ -55,10 +66,14 @@ public class StreamSelector extends AppCompatActivity implements AdapterView.OnI
                         stream.add(data.get("Stream").toString());
                     }
                    // Toast.makeText(StreamSelector.this, "STREAMS RETRIEVED", Toast.LENGTH_SHORT).show();
+
+                    loading.dismiss();
                     AfterCreation();
 
-                } else
+                } else{
                     e.printStackTrace();
+
+                }
             }
         });
         //streams=DataClass.getStreams();
@@ -71,8 +86,18 @@ public class StreamSelector extends AppCompatActivity implements AdapterView.OnI
         streams.addAll(stream);
         if(streams.size()<=0)
         {
-            Toast.makeText(this,"NOTHING TO DISPLAY",Toast.LENGTH_SHORT).show();
-            finish();
+            PrettyDialog noneDisplay=new PrettyDialog(this)
+                                    .setTitle("UNDER CONSTRUCTION")
+                                    .setMessage("Sorry this is not available right now");
+            noneDisplay.setIcon(R.drawable.buildicon);
+            noneDisplay.addButton("OK", R.color.pdlg_color_white, R.color.pdlg_color_black, new PrettyDialogCallback() {
+                @Override
+                public void onClick() {
+                    finish();
+                }
+            });
+            noneDisplay.show();
+
         }
         arrayAdapter=new ArrayAdapter(StreamSelector.this,android.R.layout.simple_list_item_1,streams){
             @NonNull

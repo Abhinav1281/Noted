@@ -24,8 +24,7 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_year_display);
         godMode=findViewById(R.id.godMode);
-        if(ParseUser.getCurrentUser().getUsername().equals("AbhinavTest") ||
-                ParseUser.getCurrentUser().getUsername().equals("Abhinav Sinha"))
+        if(ParseUser.getCurrentUser().get("AddingAuth").equals("True"))
         {
             godMode.setVisibility(View.VISIBLE);
             godMode.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +34,10 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
                     startActivity(intent);
                 }
             });
+        }
+        else
+        {
+            godMode.setVisibility(View.GONE);
         }
         f=findViewById(R.id.fstYear);
         s=findViewById(R.id.sYear);
