@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,9 +54,20 @@ public class StreamSelector extends AppCompatActivity implements AdapterView.OnI
                 .setTitle("LOADING")
                 .setMessage("Just a moment...");
         loading.setIcon(R.drawable.loading);
+        loading.setCanceledOnTouchOutside(false);
         loading.setIconTint(R.color.pdlg_color_red);
         loading.show();
 
+        if(!isNetworkAvailable())
+        {
+            loading.setMessage("Network not available.\n Check Network Settings");
+            loading.addButton("OK", R.color.pdlg_color_white, R.color.pdlg_color_black, new PrettyDialogCallback() {
+                @Override
+                public void onClick() {
+                    finish();
+                }
+            });
+        }
        //Toast.makeText(StreamSelector.this, "GETTING DATA of "+year+" "+sem, Toast.LENGTH_SHORT).show();
         ParseQuery<ParseObject> streamsQuery = ParseQuery.getQuery("URL");
         streamsQuery.whereEqualTo("Year", year);
@@ -90,6 +104,7 @@ public class StreamSelector extends AppCompatActivity implements AdapterView.OnI
                                     .setTitle("UNDER CONSTRUCTION")
                                     .setMessage("Sorry this is not available right now");
             noneDisplay.setIcon(R.drawable.buildicon);
+            noneDisplay.setCancelable(false);
             noneDisplay.addButton("OK", R.color.pdlg_color_white, R.color.pdlg_color_black, new PrettyDialogCallback() {
                 @Override
                 public void onClick() {
@@ -131,5 +146,12 @@ public class StreamSelector extends AppCompatActivity implements AdapterView.OnI
         arrayAdapter=new ArrayAdapter(StreamSelector.this,android.R.layout.simple_list_item_1,streams);
         streamList.setAdapter(arrayAdapter);
         super.onBackPressed();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }

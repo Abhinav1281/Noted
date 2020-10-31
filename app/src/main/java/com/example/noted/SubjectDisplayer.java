@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.ArraySet;
 import android.util.Log;
@@ -33,6 +36,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import libs.mjn.prettydialog.PrettyDialog;
+import libs.mjn.prettydialog.PrettyDialogCallback;
+
 public class SubjectDisplayer extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     String year,stream,sem;
@@ -43,7 +49,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
     Set<String> subject=new HashSet<>();
 
     final String sharedPrefName="SUBJECTSSHAREDPREF";
-    SharedPreferences sharedPreferences;
+    SharedPreferences subjectsharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,9 +57,10 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
         year=getIntent().getStringExtra("YEAR");
         sem = getIntent().getStringExtra("SEMESTER");
         stream=getIntent().getStringExtra("STREAM");
+
         subjects = findViewById(R.id.Subjects);
         subjects.setOnItemClickListener(SubjectDisplayer.this);
-        sharedPreferences=getSharedPreferences(sharedPrefName,MODE_PRIVATE);
+        subjectsharedPreferences=getSharedPreferences(sharedPrefName,MODE_PRIVATE);
         reloadSubject=findViewById(R.id.reloadSubject);
         reloadSubject.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,10 +68,27 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
                 subjectAddWeb();
             }
         });
+        if(!isNetworkAvailable())
+        {
+            final PrettyDialog loading=new PrettyDialog(this)
+                    .setTitle("LOADING");
+
+            loading.setIcon(R.drawable.loading);
+            loading.setCanceledOnTouchOutside(false);
+            loading.setIconTint(R.color.pdlg_color_red);
+            loading.show();
+            loading.setMessage("Network not available.\n Check Network Settings");
+            loading.addButton("OK", R.color.pdlg_color_white, R.color.pdlg_color_black, new PrettyDialogCallback() {
+                @Override
+                public void onClick() {
+                    finish();
+                }
+            });
+        }
            // Toast.makeText(SubjectDisplayer.this, "GETTING DATA", Toast.LENGTH_SHORT).show();
-           if(sharedPreferences.contains(stream))
+           if(subjectsharedPreferences.contains(stream))
            {
-               subject= sharedPreferences.getStringSet(stream,new HashSet<String>());
+               subject.addAll(subjectsharedPreferences.getStringSet(stream,new HashSet<String>()));
              //  Toast.makeText(SubjectDisplayer.this,"LOADED FROM SHAREDPREF",Toast.LENGTH_SHORT).show();
                AfterCreation();
            }
@@ -102,8 +126,18 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
     {
         subjectsList.addAll(subject);
         if (subjectsList.size() <= 0) {
-            Toast.makeText(this, "NOTHING TO DISPLAY=" + subjectsList.size(), Toast.LENGTH_SHORT).show();
-            finish();
+            PrettyDialog noneDisplay=new PrettyDialog(this)
+                    .setTitle("UNDER CONSTRUCTION")
+                    .setMessage("Sorry this is not available right now");
+            noneDisplay.setIcon(R.drawable.buildicon);
+            noneDisplay.setCancelable(false);
+            noneDisplay.addButton("OK", R.color.pdlg_color_white, R.color.pdlg_color_black, new PrettyDialogCallback() {
+                @Override
+                public void onClick() {
+                    finish();
+                }
+            });
+            noneDisplay.show();
         } else {
             arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, subjectsList) {
                 @NonNull
@@ -131,14 +165,17 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
         subjectsQuery.findInBackground(new FindCallback<ParseObject>() {
             @Override
             public void done(List<ParseObject> objects, ParseException e) {
-                if (objects.size() > 0) {
+                if (e==null) {
                     for (ParseObject data : objects) {
                         adderSubject(data.get("Subject").toString());
                     }
                     //  Toast.makeText(SubjectDisplayer.this, "SUBJECTS RETRIEVED", Toast.LENGTH_SHORT).show();
-                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                    SharedPreferences.Editor editor=subjectsharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
                     editor.putStringSet(stream,subject);
                     editor.apply();
+
                   //  Toast.makeText(SubjectDisplayer.this,"LOADED FROM WEB",Toast.LENGTH_SHORT).show();
 
                     AfterCreation();
@@ -148,7 +185,13 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
             }
         });
     }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+}
 
 
 

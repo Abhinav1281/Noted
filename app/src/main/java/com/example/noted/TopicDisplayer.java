@@ -22,6 +22,8 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -107,7 +109,9 @@ public class TopicDisplayer extends AppCompatActivity implements AdapterView.OnI
 
     void AfterCreation()
     {
+        TopicsList.clear();
         TopicsList.addAll(Topics);
+        Collections.sort(TopicsList);
         if(TopicsList.size()<=0)
         {
             Toast.makeText(this,"NOTHING TO DISPLAY",Toast.LENGTH_SHORT).show();
@@ -154,6 +158,7 @@ public class TopicDisplayer extends AppCompatActivity implements AdapterView.OnI
 
     void TopicAddweb()
     {
+        Topics.clear();
         TopicsList.clear();
         TopicsAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, TopicsList);
         TopicList.setAdapter(TopicsAdapter);
@@ -168,6 +173,8 @@ public class TopicDisplayer extends AppCompatActivity implements AdapterView.OnI
                     }
                     //Toast.makeText(TopicDisplayer.this, "Topics RETRIEVED", Toast.LENGTH_SHORT).show();
                     SharedPreferences.Editor editor=TopicssharedPreferences.edit();
+                    editor.clear();
+                    editor.apply();
                     editor.putStringSet(subject, Topics);
                     editor.apply();
                     //Toast.makeText(TopicDisplayer.this,"LOADED FROM WEB",Toast.LENGTH_SHORT).show();
