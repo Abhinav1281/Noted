@@ -11,6 +11,13 @@
         app:showAsAction="never"
         />
 
+    <item
+        android:id="@+id/reportIssue"
+        android:orderInCategory="9"
+        android:title="REPORT ISSUE"
+        app:showAsAction="never"
+        android:icon="@drawable/report_issue"/>
+
 
 
 

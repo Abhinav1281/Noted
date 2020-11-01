@@ -116,11 +116,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
             intent.putExtra("SUBJECT",subjectsList.get(position));
             startActivity(intent);
         }
-    void adderSubject(String s)
-    {
-        subject.add(s);
 
-    }
 
     void AfterCreation()
     {
@@ -155,6 +151,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
 
     void subjectAddWeb()
     {
+        subject.clear();
         subjectsList.clear();
         arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, subjectsList);
         subjects.setAdapter(arrayAdapter);
@@ -167,7 +164,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
             public void done(List<ParseObject> objects, ParseException e) {
                 if (e==null) {
                     for (ParseObject data : objects) {
-                        adderSubject(data.get("Subject").toString());
+                        subject.add(data.get("Subject").toString());
                     }
                     //  Toast.makeText(SubjectDisplayer.this, "SUBJECTS RETRIEVED", Toast.LENGTH_SHORT).show();
                     SharedPreferences.Editor editor=subjectsharedPreferences.edit();

@@ -10,7 +10,7 @@
     <ListView
         android:id="@+id/Subjects"
         android:layout_width="359dp"
-        android:layout_height="608dp"
+        android:layout_height="550dp"
         android:layout_margin="30dp"
         android:divider="#34eb98"
         android:dividerHeight="10dp"
@@ -28,6 +28,7 @@
         android:layout_margin="10dp"
         android:layout_marginTop="12dp"
         android:src="@drawable/reloadbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,9 +39,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-
+        android:layout_marginBottom="10dp"
         android:text="CLICK TO SEE NEW ADDITIONS->"
         android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/reloadSubject"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

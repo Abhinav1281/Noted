@@ -114,6 +114,11 @@ public class YearDisplay extends AppCompatActivity implements View.OnClickListen
             ParseUser.logOutInBackground();
             finish();
         }
+        else if(item.getItemId()==R.id.reportIssue)
+        {
+            Intent intent=new Intent(YearDisplay.this,IssueActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 }

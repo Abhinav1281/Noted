@@ -10,7 +10,7 @@
     <ListView
         android:id="@+id/TopicsList"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="550dp"
         android:layout_margin="20dp"
         android:divider="#34eb98"
         android:dividerHeight="10dp"
