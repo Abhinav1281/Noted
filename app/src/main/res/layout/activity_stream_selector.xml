@@ -5,9 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".StreamSelector"
-    android:background="#34eb98">
+    android:forceDarkAllowed="false">
 
-   
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/doodle4bg"/>
+    </LinearLayout>
+
     <ListView
         android:id="@+id/StreamList"
         android:layout_width="match_parent"
@@ -17,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="30dp"
-        android:divider="#34eb98"
+        android:divider="#F0F4F4F3"
         android:dividerHeight="10dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

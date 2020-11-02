@@ -42,7 +42,7 @@ import libs.mjn.prettydialog.PrettyDialogCallback;
 public class SubjectDisplayer extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     String year,stream,sem;
-    ImageButton reloadSubject;
+
     ListView subjects;
     ArrayAdapter arrayAdapter;
     ArrayList<String> subjectsList=new ArrayList<>();
@@ -61,13 +61,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
         subjects = findViewById(R.id.Subjects);
         subjects.setOnItemClickListener(SubjectDisplayer.this);
         subjectsharedPreferences=getSharedPreferences(sharedPrefName,MODE_PRIVATE);
-        reloadSubject=findViewById(R.id.reloadSubject);
-        reloadSubject.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                subjectAddWeb();
-            }
-        });
+
         if(!isNetworkAvailable())
         {
             final PrettyDialog loading=new PrettyDialog(this)
@@ -140,7 +134,7 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
                 @Override
                 public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                     View row = super.getView(position, convertView, parent);
-                    row.setBackground((getDrawable(R.drawable.listbg)));
+                    row.setBackground((getDrawable(R.drawable.button2bg)));
                     row.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                     return row;
                 }
@@ -176,9 +170,12 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
                   //  Toast.makeText(SubjectDisplayer.this,"LOADED FROM WEB",Toast.LENGTH_SHORT).show();
 
                     AfterCreation();
+                    Toast.makeText(SubjectDisplayer.this,"NEW DATA LOADED",Toast.LENGTH_SHORT).show();
 
-                } else
+                } else {
                     e.printStackTrace();
+                    Toast.makeText(SubjectDisplayer.this, "NEW DATA COULD NOT BE LOADED", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -187,6 +184,22 @@ public class SubjectDisplayer extends AppCompatActivity implements AdapterView.O
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.refreshmenu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==R.id.refresh)
+        {
+            subjectAddWeb();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".YearDisplay"
-    android:background="#34eb98">
+    android:background="@drawable/doodlebg"
+    android:forceDarkAllowed="false">
 
     <Button
         android:id="@+id/fstYear"

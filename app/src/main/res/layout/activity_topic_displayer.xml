@@ -5,45 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".TopicDisplayer"
-    android:background="#34eb98">
+    android:background="@drawable/doodle2bg"
+    android:forceDarkAllowed="false"
+
+    >
 
     <ListView
         android:id="@+id/TopicsList"
         android:layout_width="match_parent"
         android:layout_height="550dp"
         android:layout_margin="20dp"
-        android:divider="#34eb98"
+        android:divider="#000"
         android:dividerHeight="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:padding="20dp"/>
 
-    <ImageButton
-        android:id="@+id/reloadTopic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/reloadbutton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TopicsList" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-
-        android:text="CLICK TO SEE NEW ADDITIONS->"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/reloadTopic"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TopicsList" />
 </androidx.constraintlayout.widget.ConstraintLayout>

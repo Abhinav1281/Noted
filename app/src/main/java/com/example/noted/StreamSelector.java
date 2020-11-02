@@ -119,7 +119,7 @@ public class StreamSelector extends AppCompatActivity implements AdapterView.OnI
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
                 View row=super.getView(position,convertView,parent);
-                row.setBackground((getDrawable(R.drawable.listbg)));
+                row.setBackground((getDrawable(R.drawable.button2bg)));
                 row.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 return row;
             }

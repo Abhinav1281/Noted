@@ -7,6 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -36,7 +39,7 @@ public class TopicDisplayer extends AppCompatActivity implements AdapterView.OnI
     ArrayList<String> TopicsList=new ArrayList<>();
     ArrayAdapter TopicsAdapter;
     String subject;
-    ImageButton reloadTopic;
+
     final String sharedPrefName="URLSHAREDPREF";
     SharedPreferences sharedPreferences;
 
@@ -62,13 +65,7 @@ public class TopicDisplayer extends AppCompatActivity implements AdapterView.OnI
         {
             TopicAddweb();
         }
-        reloadTopic=findViewById(R.id.reloadTopic);
-        reloadTopic.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TopicAddweb();
-            }
-        });
+
 
 
     }
@@ -179,10 +176,28 @@ public class TopicDisplayer extends AppCompatActivity implements AdapterView.OnI
                     editor.apply();
                     //Toast.makeText(TopicDisplayer.this,"LOADED FROM WEB",Toast.LENGTH_SHORT).show();
                     AfterCreation();
+                    Toast.makeText(TopicDisplayer.this,"NEW DATA LOADED",Toast.LENGTH_SHORT).show();
 
-                } else
+                } else{
                     e.printStackTrace();
+                    Toast.makeText(TopicDisplayer.this,"NEW DATA COULD NOT BE LOADED",Toast.LENGTH_SHORT).show();
+                }
             }
         });
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.refreshmenu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId()==R.id.refresh)
+        {
+            TopicAddweb();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
